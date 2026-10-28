@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071b16">
+<title>Bangladesh Football League</title>
+<style>
+:root{--bg:#071b16;--panel:#102820;--panel2:#17372b;--green:#b6f36a;--muted:#a8beb3;--line:#29483c;--white:#f4f8f5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font:15px/1.5 Arial,Helvetica,sans-serif}
+header{background:linear-gradient(120deg,#0b3024,#071b16 65%);border-bottom:1px solid var(--line);padding:20px max(18px,calc((100% - 1120px)/2))}
+.brand{display:flex;align-items:center;gap:12px}.ball{width:45px;height:45px;border-radius:14px;background:var(--green);color:#092016;display:grid;place-items:center;font-size:25px}
+.brand h1{font-size:19px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+nav{display:flex;gap:8px;overflow:auto;margin-top:20px}nav button,.filter{background:transparent;border:1px solid var(--line);color:var(--muted);padding:10px 14px;border-radius:9px;cursor:pointer;white-space:nowrap}nav button.active,nav button:hover{background:var(--green);color:#092016;border-color:var(--green);font-weight:bold}
+main{max-width:1120px;margin:auto;padding:24px 18px 60px}.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-bottom:20px}
+.hero-main{border-radius:18px;padding:28px;background:linear-gradient(130deg,#174832,#0e2a20);border:1px solid #315742;min-height:220px;position:relative;overflow:hidden}
+.kicker{color:var(--green);font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase}.hero h2{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:13px 0}.hero p{color:#c4d8cc;max-width:470px}.hero-mark{position:absolute;right:22px;bottom:-30px;font-size:130px;opacity:.12}
+.season-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between}.season-card strong{font-size:28px;color:var(--green)}.season-card small{color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden;margin-bottom:18px}.card-head{display:flex;justify-content:space-between;align-items:center;padding:17px 18px;border-bottom:1px solid var(--line)}.card-head h3{margin:0;font-size:16px}.tag{color:var(--green);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:var(--muted);font-weight:normal;font-size:11px;text-transform:uppercase;letter-spacing:.5px}td,th{padding:12px 10px;border-bottom:1px solid #203d31}td:first-child,th:first-child{padding-left:18px}td:last-child,th:last-child{padding-right:18px}tr:last-child td{border-bottom:0}.team{font-weight:bold}.pos{color:var(--muted);width:25px}.pts{color:var(--green);font-weight:bold}.form{color:var(--muted);font-size:11px}
+.match-list{padding:6px 18px}.match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid #203d31}.match:last-child{border:0}.club{font-weight:bold}.club:last-child{text-align:right}.score{background:#071b16;border:1px solid var(--line);padding:7px 12px;border-radius:8px;font-weight:bold;min-width:74px;text-align:center}.time{font-size:11px;color:var(--muted);text-align:center;margin-top:5px}.teams{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px}.team-tile{border:1px solid var(--line);background:#0b211a;border-radius:12px;padding:14px}.crest{width:38px;height:38px;border-radius:50%;background:var(--panel2);display:grid;place-items:center;font-size:20px;margin-bottom:10px}.team-tile strong{display:block}.team-tile small{color:var(--muted)}.notice{font-size:12px;color:var(--muted);padding:0 18px 16px}.hidden{display:none}footer{border-top:1px solid var(--line);text-align:center;color:var(--muted);padding:25px 18px;font-size:12px}
+@media(max-width:760px){.hero,.grid{grid-template-columns:1fr}.hero-main{min-height:210px}.season-card{min-height:145px}.card{overflow-x:auto}table{min-width:480px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="ball">⚽</div><div><h1>Bangladesh Football League</h1><p>Bangladesh Football · Fan-made demo</p></div></div>
+  <nav aria-label="Main navigation">
+    <button class="active" data-view="overview">Overview</button><button data-view="table">League Table</button><button data-view="fixtures">Fixtures & Results</button><button data-view="teams">Teams</button>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <div class="hero-main"><div class="kicker">The beautiful game · Bangladesh</div><h2>Every match.<br>Every point.</h2><p>Your home for league standings, fixtures, results and clubs from Bangladesh football.</p><div class="hero-mark">⚽</div></div>
+    <div class="season-card"><div><div class="kicker">League season</div><strong>2026/27</strong><p>Fixtures · Results · Standings</p></div><small>Demo content — update with verified official data before publishing.</small></div>
+  </section>
+
+  <section id="overview" class="view">
+    <div class="grid">
+      <div class="card"><div class="card-head"><h3>League Table</h3><span class="tag">Demo data</span></div><div id="mini-table"></div></div>
+      <div class="card"><div class="card-head"><h3>Fixtures & Results</h3><span class="tag">Sample</span></div><div class="match-list" id="mini-matches"></div></div>
+    </div>
+    <div class="card"><div class="card-head"><h3>Featured Clubs</h3><span class="tag">Explore</span></div><div class="teams" id="mini-teams"></div></div>
+  </section>
+  <section id="table" class="view hidden"><div class="card"><div class="card-head"><h3>League Table</h3><span class="tag">Demo data</span></div><div id="full-table"></div><p class="notice">This is sample data for the website template, not an official current league table.</p></div></section>
+  <section id="fixtures" class="view hidden"><div class="card"><div class="card-head"><h3>Fixtures & Results</h3><span class="tag">Sample matches</span></div><div class="match-list" id="full-matches"></div><p class="notice">Replace sample fixtures and scores with confirmed league information.</p></div></section>
+  <section id="teams" class="view hidden"><div class="card"><div class="card-head"><h3>League Clubs</h3><span class="tag">Sample list</span></div><div class="teams" id="full-teams"></div><p class="notice">Club list is illustrative. Confirm participating teams for the season before launch.</p></div></section>
+</main>
+<footer>BD Football Hub · Independent fan project · Not affiliated with the Bangladesh Football Federation or league organizers.</footer>
+<script>
+/* EDIT THE SAMPLE CONTENT BELOW to update the site. */
+const clubs=[
+ {name:"Bashundhara Kings",city:"Dhaka",icon:"👑",p:6,w:4,d:1,l:1,gf:12,ga:5,pts:13},
+ {name:"Mohammedan SC",city:"Dhaka",icon:"⚫",p:6,w:3,d:2,l:1,gf:9,ga:5,pts:11},
+ {name:"Abahani Limited Dhaka",city:"Dhaka",icon:"🔵",p:6,w:3,d:1,l:2,gf:8,ga:6,pts:10},
+ {name:"Fortis FC",city:"Dhaka",icon:"🟢",p:6,w:2,d:2,l:2,gf:7,ga:7,pts:8},
+ {name:"Brothers Union",city:"Dhaka",icon:"🟡",p:6,w:1,d:2,l:3,gf:5,ga:9,pts:5},
+ {name:"Rahmatganj MFS",city:"Dhaka",icon:"🟣",p:6,w:1,d:0,l:5,gf:4,ga:13,pts:3}
+];
+const matches=[
+ {home:"Bashundhara Kings",away:"Mohammedan SC",score:"2 – 1",date:"Sample result"},
+ {home:"Abahani Limited Dhaka",away:"Fortis FC",score:"1 – 1",date:"Sample result"},
+ {home:"Brothers Union",away:"Rahmatganj MFS",score:"— : —",date:"Upcoming · TBC"},
+ {home:"Mohammedan SC",away:"Fortis FC",score:"— : —",date:"Upcoming · TBC"}
+];
+function tableHTML(){return `<table><thead><tr><th>#</th><th>Club</th><th>P</th><th>GD</th><th>Pts</th></tr></thead><tbody>${clubs.slice().sort((a,b)=>b.pts-a.pts).map((c,i)=>`<tr><td class="pos">${i+1}</td><td class="team">${c.name}</td><td>${c.p}</td><td>${c.gf-c.ga>0?"+":""}${c.gf-c.ga}</td><td class="pts">${c.pts}</td></tr>`).join("")}</tbody></table>`}
+function matchesHTML(){return matches.map(m=>`<div class="match"><div class="club">${m.home}</div><div><div class="score">${m.score}</div><div class="time">${m.date}</div></div><div class="club">${m.away}</div></div>`).join("")}
+function teamsHTML(){return clubs.map(c=>`<div class="team-tile"><div class="crest">${c.icon}</div><strong>${c.name}</strong><small>${c.city} · Sample club profile</small></div>`).join("")}
+document.getElementById("mini-table").innerHTML=tableHTML();document.getElementById("full-table").innerHTML=tableHTML();
+document.getElementById("mini-matches").innerHTML=matchesHTML();document.getElementById("full-matches").innerHTML=matchesHTML();
+document.getElementById("mini-teams").innerHTML=teamsHTML();document.getElementById("full-teams").innerHTML=teamsHTML();
+document.querySelectorAll("nav button").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("hidden",v.id!==btn.dataset.view));window.scrollTo({top:0,behavior:"smooth"});}));
+</script>
+</body>
+</html>
