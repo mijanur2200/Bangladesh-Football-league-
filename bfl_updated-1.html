@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071b16">
+<title>Bangladesh Football League</title>
+<style>
+:root{--bg:#071b16;--panel:#102820;--panel2:#17372b;--green:#b6f36a;--muted:#a8c3b3;--line:#29483c;--white:#f4f8f5;--red:#ff8a8a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font:16px/1.5 Arial,Helvetica,sans-serif}
+header{background:linear-gradient(120deg,#0b3024,#071b16 65%);border-bottom:1px solid var(--line);padding:20px 16px}
+.wrap{max-width:1100px;margin:auto}.brand{display:flex;align-items:center;gap:12px}.ball{width:54px;height:54px;border-radius:16px;background:var(--green);display:grid;place-items:center;font-size:30px;flex-shrink:0}
+h1{font-size:clamp(22px,4vw,32px);margin:0}.sub{color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-size:12px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}button,.tab{font:inherit;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:12px;padding:10px 14px}
+button:hover,.tab:hover{border-color:var(--green)}button.active,.tab.active,.primary{background:var(--green);color:#102017;border-color:var(--green);font-weight:700}
+main{max-width:1100px;margin:auto;padding:24px 16px 48px}.hero{background:linear-gradient(130deg,#174832,#0e2a20);border:1px solid #315742;border-radius:22px;padding:28px;margin-bottom:18px;position:relative;overflow:hidden}.eyebrow{color:var(--green);font-weight:bold;letter-spacing:2px;text-transform:uppercase;font-size:12px}.hero h2{font-size:clamp(28px,5vw,44px);line-height:1.08;margin:14px 0}.hero p{color:#c7d9ce;max-width:600px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px;min-width:0}.card h3{margin:0 0 14px;font-size:20px}.tag{color:var(--green);font-size:12px;text-transform:uppercase;letter-spacing:1px}
+.view{display:none}.view.active{display:block}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:570px;font-size:14px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-weight:600}td:first-child{color:var(--green);font-weight:bold}.team{display:flex;align-items:center;gap:10px}.crest{width:34px;height:34px;display:grid;place-items:center;background:var(--panel2);border-radius:10px;font-size:20px}.matches{display:grid;gap:10px}.match{border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}.match .right{text-align:right}.score{font-weight:bold;font-size:20px;color:var(--green);text-align:center;min-width:68px}.date{display:block;color:var(--muted);font-size:12px;margin-top:4px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{display:block;color:var(--muted);font-size:13px;margin-bottom:5px}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#081f18;color:var(--white);font:inherit}input[type=number]{max-width:100%}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.note{color:var(--muted);font-size:13px}.warning{border:1px solid #7e6330;background:#302713;color:#f7d99a;border-radius:12px;padding:12px;font-size:13px;margin-bottom:14px}.success{color:var(--green)}footer{text-align:center;color:var(--muted);border-top:1px solid var(--line);padding:22px 16px;font-size:12px}
+@media(max-width:700px){.grid,.formgrid{grid-template-columns:1fr}.hero{padding:22px}.card{padding:16px}.match{grid-template-columns:1fr 64px 1fr;font-size:14px}nav button{padding:9px 11px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand"><div class="ball">⚽</div><div><h1>Bangladesh Football League</h1><div class="sub">Bangladesh football · Fan-made demo</div></div></div>
+  <nav aria-label="Main navigation">
+    <button class="tab active" data-view="overview">Overview</button>
+    <button class="tab" data-view="table">League Table</button>
+    <button class="tab" data-view="fixtures">Fixtures & Results</button>
+    <button class="tab" data-view="teams">Teams</button>
+    <button class="tab" data-view="admin">Admin Panel</button>
+  </nav>
+</div></header>
+<main>
+<section id="overview" class="view active">
+  <div class="hero"><div class="eyebrow">The beautiful game · Bangladesh</div><h2>Every match.<br>Every point.</h2><p>Your home for league standings, fixtures, results and clubs from Bangladesh football.</p></div>
+  <div class="grid">
+    <div class="card"><div class="tag">League season</div><h2>2026/27</h2><p>Fixtures · Results · Standings</p><p class="note">Demo content — replace with verified official data before publishing.</p></div>
+    <div class="card"><div class="tag">League snapshot</div><h3 id="snapshot">Loading standings…</h3><p class="note">Table updates automatically when you save match scores in this browser.</p></div>
+  </div>
+  <div class="card"><div class="cardhead"><h3>Latest results & upcoming matches</h3></div><div id="mini-matches" class="matches"></div></div>
+</section>
+<section id="table" class="view"><div class="card"><div class="tag">2026/27 season</div><h2>League Table</h2><p class="note">Ranked by points, then goal difference, then goals scored.</p><div id="full-table" class="scroll"></div></div></section>
+<section id="fixtures" class="view"><div class="card"><div class="tag">Match centre</div><h2>Fixtures & Results</h2><div id="full-matches" class="matches"></div></div></section>
+<section id="teams" class="view"><div class="card"><div class="tag">Club directory</div><h2>League Teams</h2><div id="full-teams" class="grid"></div></div></section>
+<section id="admin" class="view">
+  <div class="card"><div class="tag">Site management</div><h2>Admin Panel</h2>
+    <div class="warning"><b>Important:</b> This demo saves edits only in this browser on this device. It does not securely update the public website for other visitors. A real shared admin panel needs a backend and login security.</div>
+    <h3>Update a match score</h3>
+    <div class="formgrid">
+      <div><label for="match-select">Match</label><select id="match-select"></select></div>
+      <div><label for="match-date">Date / status</label><input id="match-date" placeholder="e.g. 28 Oct 2026 · FT"></div>
+      <div><label for="home-score">Home team goals</label><input id="home-score" type="number" min="0" max="99" placeholder="0"></div>
+      <div><label for="away-score">Away team goals</label><input id="away-score" type="number" min="0" max="99" placeholder="0"></div>
+    </div>
+    <div class="actions"><button class="primary" id="save-score">Save score</button><button id="clear-score">Set as upcoming</button><button id="reset-demo">Reset demo data</button></div>
+    <p id="admin-message" class="note" aria-live="polite"></p>
+  </div>
+  <div class="card"><h3>How to update real league data</h3><p>Use verified club names, dates and results. This starter website includes illustrative sample data only and is not affiliated with the Bangladesh Football Federation or league organizers.</p></div>
+</section>
+</main>
+<footer>Bangladesh Football League · Independent fan-made demo · Not affiliated with official league organizers.</footer>
+<script>
+const defaultClubs=[
+ {name:"Bashundhara Kings",city:"Dhaka",icon:"🟢"},
+ {name:"Mohammedan SC",city:"Dhaka",icon:"⚫"},
+ {name:"Abahani Limited Dhaka",city:"Dhaka",icon:"🔵"},
+ {name:"Fortis FC",city:"Dhaka",icon:"🟩"},
+ {name:"Brothers Union",city:"Dhaka",icon:"🟡"},
+ {name:"Rahmatganj MFS",city:"Dhaka",icon:"🟣"}
+];
+const defaultMatches=[
+ {home:0,away:1,hs:2,as:1,date:"Sample result · FT"},
+ {home:2,away:3,hs:1,as:1,date:"Sample result · FT"},
+ {home:4,away:5,hs:null,as:null,date:"Upcoming · TBC"},
+ {home:1,away:3,hs:null,as:null,date:"Upcoming · TBC"},
+ {home:0,away:4,hs:null,as:null,date:"Upcoming · TBC"},
+ {home:5,away:2,hs:null,as:null,date:"Upcoming · TBC"}
+];
+let clubs=JSON.parse(JSON.stringify(defaultClubs)),matches=JSON.parse(JSON.stringify(defaultMatches));
+try{const s=localStorage.getItem("bfl-demo-state");if(s){const d=JSON.parse(s);if(d.clubs&&d.matches){clubs=d.clubs;matches=d.matches}}}catch(e){}
+function save(){try{localStorage.setItem("bfl-demo-state",JSON.stringify({clubs,matches}));}catch(e){}}
+function standings(){const rows=clubs.map((c,i)=>({i,name:c.name,pl:0,w:0,d:0,l:0,gf:0,ga:0,pts:0}));matches.forEach(m=>{if(m.hs===null||m.as===null)return;const h=rows[m.home],a=rows[m.away];if(!h||!a)return;h.pl++;a.pl++;h.gf+=m.hs;h.ga+=m.as;a.gf+=m.as;a.ga+=m.hs;if(m.hs>m.as){h.w++;a.l++;h.pts+=3}else if(m.hs<m.as){a.w++;h.l++;a.pts+=3}else{h.d++;a.d++;h.pts++;a.pts++}});return rows.map(r=>({...r,gd:r.gf-r.ga})).sort((a,b)=>b.pts-a.pts||b.gd-a.gd||b.gf-a.gf)}
+function tableHTML(){const rows=standings();return '<table><thead><tr><th>#</th><th>Club</th><th>Pl</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead><tbody>'+rows.map((r,n)=>`<tr><td>${n+1}</td><td><span class="team"><span class="crest">${clubs[r.i].icon}</span>${r.name}</span></td><td>${r.pl}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td><td>${r.gf}</td><td>${r.ga}</td><td>${r.gd>0?"+":""}${r.gd}</td><td><b>${r.pts}</b></td></tr>`).join("")+'</tbody></table>'}
+function matchHTML(m,i){const hs=m.hs===null?"–":m.hs,as=m.as===null?"–":m.as;return `<div class="match"><div>${clubs[m.home]?.name||"Home team"}<span class="date">${m.date||"Date TBC"}</span></div><div class="score">${hs} : ${as}</div><div class="right">${clubs[m.away]?.name||"Away team"}</div></div>`}
+function render(){document.getElementById("full-table").innerHTML=tableHTML();document.getElementById("mini-matches").innerHTML=matches.slice(0,3).map(matchHTML).join("");document.getElementById("full-matches").innerHTML=matches.map(matchHTML).join("");document.getElementById("full-teams").innerHTML=clubs.map(c=>`<div class="card"><div class="team"><span class="crest">${c.icon}</span><div><b>${c.name}</b><div class="note">${c.city}</div></div></div></div>`).join("");const s=standings();document.getElementById("snapshot").textContent=s.length?`${s[0].name} · ${s[0].pts} points`:"No table data";const sel=document.getElementById("match-select"),old=sel.value;sel.innerHTML=matches.map((m,i)=>`<option value="${i}">${clubs[m.home].name} vs ${clubs[m.away].name}</option>`).join("");if(old!==""&&matches[Number(old)])sel.value=old;loadSelected()}
+function loadSelected(){const i=Number(document.getElementById("match-select").value||0),m=matches[i];if(!m)return;document.getElementById("match-date").value=m.date||"";document.getElementById("home-score").value=m.hs===null?"":m.hs;document.getElementById("away-score").value=m.as===null?"":m.as}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===b.dataset.view));}));
+document.getElementById("match-select").addEventListener("change",loadSelected);
+document.getElementById("save-score").addEventListener("click",()=>{const i=Number(document.getElementById("match-select").value),hs=document.getElementById("home-score").value,as=document.getElementById("away-score").value;if(hs===""||as===""||Number(hs)<0||Number(as)<0){document.getElementById("admin-message").textContent="Enter both scores (0 or higher).";return}matches[i].hs=Number(hs);matches[i].as=Number(as);matches[i].date=document.getElementById("match-date").value.trim()||"Result · FT";save();render();document.getElementById("admin-message").innerHTML='<span class="success">Saved on this device. Public website visitors will not see this change yet.</span>'});
+document.getElementById("clear-score").addEventListener("click",()=>{const i=Number(document.getElementById("match-select").value);matches[i].hs=null;matches[i].as=null;matches[i].date=document.getElementById("match-date").value.trim()||"Upcoming · TBC";save();render();document.getElementById("admin-message").textContent="Match marked as upcoming on this device."});
+document.getElementById("reset-demo").addEventListener("click",()=>{if(confirm("Reset all scores to the original demo data?")){clubs=JSON.parse(JSON.stringify(defaultClubs));matches=JSON.parse(JSON.stringify(defaultMatches));save();render();document.getElementById("admin-message").textContent="Demo data reset."}});
+render();
+</script>
+</body></html>
